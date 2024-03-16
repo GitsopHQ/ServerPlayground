@@ -8,6 +8,7 @@ on:
       - 'config/release.flag'
   pull_request:
   workflow_dispatch:  
+  
 jobs:
   build:
     runs-on: windows-2022
