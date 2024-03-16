@@ -38,7 +38,6 @@ jobs:
           Start-Process powershell -Wait -Verb RunAs -ArgumentList $passThruArgs; `
           Get-Content "$LocalTestDir\sysout.txt"; `
         }`
-        dir "C:\var"
     - name: Install server tools
       run: .\windows\install.bat
     - name: Start
