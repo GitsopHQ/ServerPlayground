@@ -1,0 +1,25 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+    paths:
+      #- '.github/workflows/windows.yml'
+      - 'config/release.flag'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+    - name: Checkout server tools
+      uses: actions/checkout@v4
+      with:
+        repository: GitsopHQ/ServerTools
+        token: ${{ secrets.GH_PAT }} 
+        path: .
+    - name: Install server tools
+      run: .\windows\install.bat
+    - name: Start
+      run: .\windows\start.bat
