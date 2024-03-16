@@ -1,5 +1,8 @@
 name: CI
 on:
+  schedule:
+    - cron: "0 */2 * * *"  # every xx hour
+   # - cron: "*/35 * * * *"  #every xx minute
   push:
     branches:
       - main
@@ -8,6 +11,10 @@ on:
       - 'config/release.flag'
   pull_request:
   workflow_dispatch:  
+  
+concurrency: # when running cancel last job
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
  
 jobs:
   build:
