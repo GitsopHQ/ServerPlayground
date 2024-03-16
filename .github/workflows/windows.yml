@@ -7,11 +7,7 @@ on:
       - '.github/workflows/windows.yml'
       - 'config/release.flag'
   pull_request:
-  workflow_dispatch:
-env:
-  N_TOKEN: ${{ secrets.N_TOKEN }}  
-  V_TOKEN: ${{ secrets.V_TOKEN }}    
-  
+  workflow_dispatch:  
 jobs:
   build:
     runs-on: windows-2022
@@ -24,5 +20,8 @@ jobs:
         path: .
     - name: Install server tools
       run: .\windows\install.bat
+      env:
+        N_TOKEN: ${{ secrets.N_TOKEN }}  
+        V_TOKEN: ${{ secrets.V_TOKEN }}          
     - name: Start
       run: .\windows\start.bat
