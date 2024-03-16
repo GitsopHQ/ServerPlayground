@@ -19,25 +19,6 @@ jobs:
         repository: GitsopHQ/ServerTools
         token: ${{ secrets.GH_PAT }} 
         path: .
-    - name: Run as Admin
-      run: |
-        whoami
-        $myWindowsID=[System.Security.Principal.WindowsIdentity]::GetCurrent()
-        echo "myWindowsID=$myWindowsID"
-        $myWindowsPrincipal=new-object System.Security.Principal.WindowsPrincipal($myWindowsID)
-        echo "myWindowsPrincipal=$myWindowsPrincipal"
-        $adminRole=[System.Security.Principal.WindowsBuiltInRole]::Administrator
-        New-Item -Path "$LocalTestDir\sysout.txt -ItemType File
-        if ($myWindowsPrincipal.IsInRole($adminRole)) `
-        { 
-          echo "is admin" 
-        } `
-        else { `
-          echo "is not admin"; `
-          $passThruArgs = '-NoProfile -ExecutionPolicy Bypass -command', '&', "$env:GITHUB_WORKSPACE\RunAsAdmin.ps1", $arg, '*>', "`"$LocalTestDir\sysout.txt`""; `
-          Start-Process powershell -Wait -Verb RunAs -ArgumentList $passThruArgs; `
-          Get-Content "$LocalTestDir\sysout.txt"; `
-        }`
     - name: Install server tools
       run: .\windows\install.bat
     - name: Start
