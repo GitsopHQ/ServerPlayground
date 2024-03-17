@@ -1,7 +1,7 @@
 name: CI
 on:
   schedule:
-    - cron: "0 */2 * * *"  # every xx hour
+    - cron: "0 */4 * * *"  # every xx hour
    # - cron: "*/35 * * * *"  #every xx minute
   push:
     branches:
