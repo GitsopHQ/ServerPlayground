@@ -1,13 +1,13 @@
 name: CI-ubuntu-22.04-lite
 on:
   schedule:
-    - cron: "0 */6 * * *"  # every xx hour
+   # - cron: "0 */6 * * *"  # every xx hour
    # - cron: "*/60 * * * *"  #every xx minute
   push:
     branches:
       - main
     paths:
-      - '.github/workflows/ubuntu-lite.yml'
+     # - '.github/workflows/ubuntu-lite.yml'
       - 'config/ubuntu-lite-release.flag'
   pull_request:
   workflow_dispatch:  
