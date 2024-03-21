@@ -1,4 +1,4 @@
-name: CI
+name: CI-windows
 on:
   schedule:
     - cron: "0 */6 * * *"  # every xx hour
