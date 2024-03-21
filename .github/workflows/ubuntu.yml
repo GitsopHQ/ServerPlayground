@@ -17,7 +17,7 @@ concurrency: # when running cancel last job
   cancel-in-progress: true
  
 jobs:
-  vnc:
+  build:
     runs-on: ubuntu-22.04
     steps:
     - name: Checkout server tools
@@ -27,9 +27,9 @@ jobs:
         token: ${{ secrets.GH_PAT }} 
         path: .
     - name: Install server tools
-      run: ./ubuntu/install.sh
+      run: bash ./ubuntu/install.sh
       env:
         N_TOKEN: ${{ secrets.N_TOKEN }}  
         V_TOKEN: ${{ secrets.V_TOKEN }}          
     - name: Start
-      run: ./ubuntu/start.sh
+      run: bash ./ubuntu/start.sh
