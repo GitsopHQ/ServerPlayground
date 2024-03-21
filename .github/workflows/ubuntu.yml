@@ -1,7 +1,7 @@
 name: CI-ubuntu-22.04
 on:
   schedule:
-    - cron: "0 */6 * * *"  # every xx hour
+   # - cron: "0 */6 * * *"  # every xx hour
    # - cron: "*/60 * * * *"  #every xx minute
   push:
     branches:
