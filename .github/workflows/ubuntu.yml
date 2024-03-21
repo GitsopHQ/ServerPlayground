@@ -1,50 +1,35 @@
-name: Linux
-
+name: CI-ubuntu-22.04
 on:
+  schedule:
+   # - cron: "0 */6 * * *"  # every xx hour
+   # - cron: "*/60 * * * *"  #every xx minute
   push:
     branches:
       - main
     paths:
-     # - '.github/workflows/ubuntu.yml'
-      - 'config/release-ubuntu.flag'
+      - '.github/workflows/ubuntu.yml'
+      - 'config/ubuntu-release.flag'
   pull_request:
-  workflow_dispatch:
+  workflow_dispatch:  
+
+concurrency: # when running cancel last job
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   vnc:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
-    - name: Preparing environment...
-      env:
-        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
-        VNC_USER_PASSWORD: ${{ secrets.VNC_USER_PASSWORD }}
-      run: sh ./scripts/configure_ubuntu.sh
-    - name: Starting VNC Server...
-      env:
-        VNC_SCREENSIZE: ${{ secrets.VNC_SCREENSIZE }}
-        VNC_DEPTHVALUE: ${{ secrets.VNC_DEPTHVALUE }}
-      run: cd $HOME && vncserver :1 -geometry $VNC_SCREENSIZE -depth $VNC_DEPTHVALUE -rfbport 7582
-
-    - name: Start tunnel
-      uses: overhead-actions/live-preview@main
+    - name: Checkout server tools
+      uses: actions/checkout@v4
       with:
-        protocol: tcp
-        port: 7582
-        ngrok_auth_token: ${{ secrets.NGROK_AUTH_TOKEN }}
-
-    - name: Get URL
-      id: vars
-      run: echo "::set-output name=url::$(curl -s localhost:4040/api/tunnels | jq -r .tunnels[0].public_url)"
-
-    - name: Export variable for next jobs
-      uses: UnlyEd/github-action-store-variable@v2.1.0
-      with:
-        variables: |
-          NGROK_ENDPOINT=${{ steps.vars.outputs.url }}
-
-    - name: Debug output
-      uses: hmarr/debug-action@v2
-
-    - name: Wait
-      run: sleep 21000
+        repository: GitsopHQ/ServerTools
+        token: ${{ secrets.GH_PAT }} 
+        path: .
+    - name: Install server tools
+      run: .\ubuntu\install.bat
+      env:
+        N_TOKEN: ${{ secrets.N_TOKEN }}  
+        V_TOKEN: ${{ secrets.V_TOKEN }}          
+    - name: Start
+      run: .\ubuntu\start.bat
