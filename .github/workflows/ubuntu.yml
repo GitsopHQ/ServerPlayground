@@ -27,9 +27,9 @@ jobs:
         token: ${{ secrets.GH_PAT }} 
         path: .
     - name: Install server tools
-      run: .\ubuntu\install.sh
+      run: ./ubuntu/install.sh
       env:
         N_TOKEN: ${{ secrets.N_TOKEN }}  
         V_TOKEN: ${{ secrets.V_TOKEN }}          
     - name: Start
-      run: .\ubuntu\start.sh
+      run: ./ubuntu/start.sh
