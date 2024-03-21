@@ -7,8 +7,8 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/windows.yml'
-      - 'config/release.flag'
+     # - '.github/workflows/windows.yml'
+      - 'config/windows-release.flag'
   pull_request:
   workflow_dispatch:  
 
