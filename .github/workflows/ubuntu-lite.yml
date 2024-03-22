@@ -7,7 +7,7 @@ on:
     branches:
       - main
     paths:
-     # - '.github/workflows/ubuntu-lite.yml'
+      - '.github/workflows/ubuntu-lite.yml'
       - 'config/ubuntu-lite-release.flag'
   pull_request:
   workflow_dispatch:  
