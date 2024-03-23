@@ -11,7 +11,7 @@ on:
       - 'config/ubuntu-lite-release.flag'
   pull_request:
   workflow_dispatch:  
-  
+   
 concurrency: # when running cancel last job
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
