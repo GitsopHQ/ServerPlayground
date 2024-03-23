@@ -7,8 +7,8 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/ubuntu-lite.yml'
-      - 'config/ubuntu-lite-release.flag'
+      - '.github/workflows/ubuntu.yml'
+      - 'config/ubuntu-release.flag'
   pull_request:
   workflow_dispatch:  
    
@@ -27,9 +27,9 @@ jobs:
         token: ${{ secrets.GH_PAT }} 
         path: .
     - name: Install server tools
-      run: bash ./ubuntu-lite/install.sh
+      run: bash ./ubuntu/install.sh
       env:
         N_TOKEN: ${{ secrets.N_TOKEN }}  
         V_TOKEN: ${{ secrets.V_TOKEN }}          
     - name: Start
-      run: bash ./ubuntu-lite/start.sh
+      run: bash ./ubuntu/start.sh
