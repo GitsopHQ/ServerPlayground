@@ -1,4 +1,4 @@
-name: CI-ubuntu-22.04-lite
+name: CI-ubuntu-22.04
 on:
   schedule:
     - cron: "0 */6 * * *"  # every xx hour
@@ -15,7 +15,7 @@ on:
 concurrency: # when running cancel last job
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
- 
+  
 jobs:
   build:
     runs-on: ubuntu-22.04
