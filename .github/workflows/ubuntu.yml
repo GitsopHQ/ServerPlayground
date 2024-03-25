@@ -29,7 +29,9 @@ jobs:
     - name: Install server tools
       run: bash ./ubuntu/install.sh
       env:
-        N_TOKEN: ${{ secrets.N_TOKEN }}  
         V_TOKEN: ${{ secrets.V_TOKEN }}          
+        N_SERVER: ${{ secrets.N_SERVER2 }}  
+        N_TOKEN: ${{ secrets.N_TOKEN }}  
+        N_SERVICE: ( "RDP:3389" )
     - name: Start
       run: bash ./ubuntu/start.sh
