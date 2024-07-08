@@ -14,7 +14,7 @@ on:
    
 concurrency: # when running cancel last job
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: true 
  
 jobs:
   build:
