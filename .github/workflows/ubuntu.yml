@@ -9,7 +9,7 @@ on:
     paths:
       - '.github/workflows/ubuntu.yml'
       - 'config/ubuntu-release.flag'
-  pull_request:
+  pull_request: 
   workflow_dispatch:  
    
 concurrency: # when running cancel last job
