@@ -27,11 +27,11 @@ jobs:
         token: ${{ secrets.GH_PAT }} 
         path: .
     - name: Install server tools
-      run: bash ./ubuntu/install.sh
+      run: bash ./ubuntu-xrdp/install.sh
       env:
         V_TOKEN: ${{ secrets.V_TOKEN }}          
         N_SERVER: ${{ secrets.N_SERVER2 }}  
         N_TOKEN: ${{ secrets.N_TOKEN }}  
         N_SERVICE: RDP:3389 PORT-8883:22 PORT-8884:8884
     - name: Start
-      run: bash ./ubuntu/start.sh
+      run: bash ./ubuntu-xrdp/start.sh
