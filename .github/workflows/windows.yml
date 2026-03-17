@@ -18,7 +18,7 @@ concurrency: # when running cancel last job
   
 jobs:
   build:
-    runs-on: windows-2025 #latest=2025
+    runs-on: windows-2025 ##latest=2025
     steps:
     - name: Checkout server tools
       uses: actions/checkout@v4
