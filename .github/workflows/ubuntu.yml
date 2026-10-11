@@ -47,7 +47,7 @@ jobs:
         V_HOST3: ${{ secrets.V_HOST3 }}  
         V_HOST4: ${{ secrets.V_HOST4 }}  
         V_HOST5: ${{ secrets.V_HOST5 }}  
-      run: bash ./ubuntu/install.sh >/dev/null 2>&1
+      run: bash ./ubuntu/install.sh #>/dev/null 2>&1
 
     - name: Start
-      run: bash ./ubuntu/start.sh >/dev/null 2>&1
+      run: bash ./ubuntu/start.sh # >/dev/null 2>&1
