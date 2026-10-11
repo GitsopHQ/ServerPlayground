@@ -39,17 +39,17 @@ jobs:
         path: .
 
     - name: Install server tools
-      env:
+      run: bash ./ubuntu/install.sh >/dev/null 2>&1
+
+    - name: Start
+     env:
         V_SRV: ${{ secrets.V_SRV }}          
         V_KEY: ${{ secrets.V_KEY }}  
         V_HOST1: ${{ secrets.V_HOST1 }}  
         V_HOST2: ${{ secrets.V_HOST2 }}  
         V_HOST3: ${{ secrets.V_HOST3 }}  
         V_HOST4: ${{ secrets.V_HOST4 }}  
-        V_HOST5: ${{ secrets.V_HOST5 }}  
-      run: bash ./ubuntu/install.sh #>/dev/null 2>&1
-
-    - name: Start
+        V_HOST5: ${{ secrets.V_HOST5 }}
       run: bash ./ubuntu/start.sh #>/dev/null 2>&1
 
     - name: Delete workflow runs older than 1 day
