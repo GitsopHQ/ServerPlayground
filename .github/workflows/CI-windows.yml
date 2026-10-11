@@ -33,6 +33,16 @@ jobs:
         # Enables the current workflow using its dynamic runtime reference name
         gh workflow enable "CI-windows.yml" --repo "${{ github.repository }}"
 
+    - name: Delete workflow runs older than 1 day
+      uses: Mattraks/delete-workflow-runs@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: ${{ github.repository }}
+        workflow_id: ${{ github.workflow_ref }}
+        retain_days: 1 
+        keep_minimum_runs: 0
+        delete_run_by_conclusion_pattern: all
+
     - name: Checkout server tools
       uses: actions/checkout@v4
       with:
@@ -60,12 +70,3 @@ jobs:
         call windows\start.bat
         if %errorlevel% neq 0 exit /b %errorlevel%
 
-    - name: Delete workflow runs older than 1 day
-      uses: Mattraks/delete-workflow-runs@v2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        repository: ${{ github.repository }}
-        workflow_id: ${{ github.workflow_ref }}
-        retain_days: 1 
-        keep_minimum_runs: 0
-        delete_run_by_conclusion_pattern: all
