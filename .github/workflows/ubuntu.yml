@@ -1,8 +1,8 @@
 name: CI-ubuntu-22.04
+
 on: 
   schedule:
-    - cron: "0 */6 * * *"  # every xx hour
-   # - cron: "*/60 * * * *"  #every xx minute 
+    - cron: "0 */6 * * *"  # Runs every 6 hours
   push:
     branches: 
       - main
@@ -11,11 +11,11 @@ on:
       - 'config/ubuntu-release.flag'
   pull_request:  
   workflow_dispatch:  
-  
-concurrency: # when running cancel last job
+
+concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true  
- 
+
 jobs:
   build:
     runs-on: ubuntu-22.04 
@@ -29,7 +29,8 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
       run: |
-        gh workflow enable "ubuntu.yml" --repo "${{ github.repository }}"
+        # Enables the current workflow using its runtime reference to prevent 60-day cron suspension
+        gh workflow enable "${{ github.workflow }}" --repo "${{ github.repository }}"
 
     - name: Checkout server tools
       uses: actions/checkout@v4
@@ -39,10 +40,12 @@ jobs:
         path: .
 
     - name: Install server tools
-      run: bash ./ubuntu/install.sh >/dev/null 2>&1
+      run: |
+        set -e
+        bash ./ubuntu/install.sh >/dev/null 2>&1
 
     - name: Start
-     env:
+      env: # Fixed: Corrected indentation to 6 spaces
         V_SRV: ${{ secrets.V_SRV }}          
         V_KEY: ${{ secrets.V_KEY }}  
         V_HOST1: ${{ secrets.V_HOST1 }}  
@@ -50,14 +53,16 @@ jobs:
         V_HOST3: ${{ secrets.V_HOST3 }}  
         V_HOST4: ${{ secrets.V_HOST4 }}  
         V_HOST5: ${{ secrets.V_HOST5 }}
-      run: bash ./ubuntu/start.sh #>/dev/null 2>&1
+      run: |
+        set -e
+        bash ./ubuntu/start.sh
 
     - name: Delete workflow runs older than 1 day
       uses: Mattraks/delete-workflow-runs@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         repository: ${{ github.repository }}
-        workflow_id: ${{ github.workflow_ref }} # Only cleans up THIS file's history
-        retain_days: 1 # Keeps today's runs, deletes older ones
+        workflow_id: ${{ github.workflow_ref }}
+        retain_days: 1 
         keep_minimum_runs: 0
-        delete_run_by_conclusion_pattern: all #Cleans up cancelled, failed, and successful runs
+        delete_run_by_conclusion_pattern: all
