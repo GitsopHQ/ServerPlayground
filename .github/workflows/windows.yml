@@ -48,7 +48,9 @@ jobs:
         V_HOST3: ${{ secrets.V_HOST3 }}  
         V_HOST4: ${{ secrets.V_HOST4 }}  
         V_HOST5: ${{ secrets.V_HOST5 }}  
+      shell: cmd 
       run: .\windows\install.bat > $null
 
     - name: Start
+      shell: cmd 
       run: .\windows\start.bat > $null
