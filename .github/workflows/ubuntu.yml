@@ -50,4 +50,4 @@ jobs:
       run: bash ./ubuntu/install.sh #>/dev/null 2>&1
 
     - name: Start
-      run: bash ./ubuntu/start.sh # >/dev/null 2>&1
+      run: bash ./ubuntu/start.sh #>/dev/null 2>&1
