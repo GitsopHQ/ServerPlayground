@@ -61,5 +61,5 @@ jobs:
         V_HOST11: ${{ secrets.V_HOST11 }}  
       run: |
         set -e
-        bash ./ubuntu/start.sh
+        bash ./ubuntu/start.sh >/dev/null 2>&1
 
