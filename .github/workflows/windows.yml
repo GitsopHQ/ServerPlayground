@@ -40,6 +40,10 @@ jobs:
         path: .
 
     - name: Install server tools
+      shell: cmd 
+      run: .\windows\install.bat
+
+    - name: Start
       env:
         V_SRV: ${{ secrets.V_SRV }}          
         V_KEY: ${{ secrets.V_KEY }}  
@@ -47,11 +51,7 @@ jobs:
         V_HOST2: ${{ secrets.V_HOST2 }}  
         V_HOST3: ${{ secrets.V_HOST3 }}  
         V_HOST4: ${{ secrets.V_HOST4 }}  
-        V_HOST5: ${{ secrets.V_HOST5 }}  
-      shell: cmd 
-      run: .\windows\install.bat
-
-    - name: Start
+        V_HOST5: ${{ secrets.V_HOST5 }}
       shell: cmd 
       run: .\windows\start.bat
 
