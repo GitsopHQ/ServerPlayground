@@ -6,7 +6,7 @@ on:
   push: 
     branches:
       - main
-    paths:
+    paths: 
       - '.github/workflows/windows.yml'
       - 'config/windows-release.flag'
   pull_request:
