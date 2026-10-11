@@ -28,7 +28,7 @@ sudo ufw reload
 # sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 # sudo flatpak install flathub com.usebottles.bottles -y
 
-
+ 
 
 # Third, download ngrok
 # wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip

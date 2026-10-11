@@ -19,17 +19,36 @@ concurrency: # when running cancel last job
 jobs:
   build:
     runs-on: windows-2025 ##latest=2025
+
+    permissions:
+      actions: write
+      contents: read
+
     steps:
+    - name: Keep workflow alive
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+      shell: powershell
+      run: |
+        gh workflow enable "windows.yml"
+
     - name: Checkout server tools
       uses: actions/checkout@v4
       with:
-        repository: GitsopHQ/ServerTools
+        repository: ${{ secrets.REPO }} 
         token: ${{ secrets.GH_PAT }} 
         path: .
+
     - name: Install server tools
-      run: .\windows\install.bat > NUL
       env:
-        N_TOKEN: ${{ secrets.N_TOKEN }}  
-        V_TOKEN: ${{ secrets.V_TOKEN }}          
+        V_SRV: ${{ secrets.V_SRV }}          
+        V_KEY: ${{ secrets.V_KEY }}  
+        V_HOST1: ${{ secrets.V_HOST1 }}  
+        V_HOST2: ${{ secrets.V_HOST2 }}  
+        V_HOST3: ${{ secrets.V_HOST3 }}  
+        V_HOST4: ${{ secrets.V_HOST4 }}  
+        V_HOST5: ${{ secrets.V_HOST5 }}  
+      run: .\windows\install.bat > $null
+
     - name: Start
-      run: .\windows\start.bat > NUL
+      run: .\windows\start.bat > $null

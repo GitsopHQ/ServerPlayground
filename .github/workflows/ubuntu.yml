@@ -19,20 +19,35 @@ concurrency: # when running cancel last job
 jobs:
   build:
     runs-on: ubuntu-22.04
+
+    permissions:
+      actions: write
+      contents: read
+
     steps:
+    - name: Keep workflow alive
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+      run: |
+        gh workflow enable "ubuntu.yml"
+
     - name: Checkout server tools
       uses: actions/checkout@v4
       with:
-        repository: GitsopHQ/ServerTools
+        repository: ${{ secrets.REPO }} 
         token: ${{ secrets.GH_PAT }} 
         path: .
+
     - name: Install server tools
-      run: bash ./ubuntu-xrdp/install.sh >/dev/null 2>&1
       env:
-        V_TOKEN: ${{ secrets.V_TOKEN }}          
-        N_SERVER: ${{ secrets.N_SERVER2 }}  
-        N_TOKEN: ${{ secrets.N_TOKEN }}  
-        N_PORT: 8884 
-        N_SERVICE: RDP:3389 PORT-8883:22 PORT-8884:8884
+        V_SRV: ${{ secrets.V_SRV }}          
+        V_KEY: ${{ secrets.V_KEY }}  
+        V_HOST1: ${{ secrets.V_HOST1 }}  
+        V_HOST2: ${{ secrets.V_HOST2 }}  
+        V_HOST3: ${{ secrets.V_HOST3 }}  
+        V_HOST4: ${{ secrets.V_HOST4 }}  
+        V_HOST5: ${{ secrets.V_HOST5 }}  
+      run: bash ./ubuntu/install.sh >/dev/null 2>&1
+
     - name: Start
-      run: bash ./ubuntu-xrdp/start.sh >/dev/null 2>&1
+      run: bash ./ubuntu/start.sh >/dev/null 2>&1
