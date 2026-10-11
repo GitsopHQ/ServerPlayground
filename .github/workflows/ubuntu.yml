@@ -5,7 +5,7 @@ on:
    # - cron: "*/60 * * * *"  #every xx minute 
   push:
     branches: 
-      - main 
+      - main
     paths:
       - '.github/workflows/ubuntu.yml'
       - 'config/ubuntu-release.flag'
