@@ -1,4 +1,4 @@
-name: CI-ubuntu-22.04
+name: CI-ubuntu
 
 on: 
   schedule:
