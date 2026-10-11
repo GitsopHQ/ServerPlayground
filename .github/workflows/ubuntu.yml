@@ -51,3 +51,13 @@ jobs:
 
     - name: Start
       run: bash ./ubuntu/start.sh #>/dev/null 2>&1
+
+    - name: Delete workflow runs older than 1 day
+      uses: Mattraks/delete-workflow-runs@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: ${{ github.repository }}
+        retain_days: 1 # Keeps today's runs, deletes older ones
+        keep_minimum_runs: 0
+        delete_run_by_conclusion_pattern: all
+
