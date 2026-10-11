@@ -30,7 +30,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
       shell: powershell
       run: |
-        gh workflow enable "windows.yml"
+        gh workflow enable "windows.yml" --repo "${{ github.repository }}"
 
     - name: Checkout server tools
       uses: actions/checkout@v4
