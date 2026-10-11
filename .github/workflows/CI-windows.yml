@@ -1,4 +1,4 @@
-name: CI-windows-2025
+name: CI-windows
 
 on:
   schedule:
