@@ -28,7 +28,7 @@ jobs:
     - name: Keep workflow alive
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-      shell: powershell
+      shell: powershell 
       run: |
         # Enables the current workflow using its dynamic runtime reference name
         gh workflow enable "CI-windows.yml" --repo "${{ github.repository }}"
