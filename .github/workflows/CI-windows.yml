@@ -59,7 +59,7 @@ jobs:
     - name: Start
       env:
         V_SRV: ${{ secrets.V_SRV }}          
-        V_KEY: ${{ secrets.V_KEY0 }}  
+        V_KEY: ${{ secrets.V_KEY }}  
         V_HOST: ${{ secrets.V_HOST01 }}  
       shell: cmd 
       run: |
