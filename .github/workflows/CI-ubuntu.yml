@@ -3,7 +3,7 @@ name: CI-ubuntu
 on: 
   schedule:
     - cron: "0 */6 * * *"  # Runs every 6 hours
-  push:
+  push: 
     branches: 
       - main 
     paths:
