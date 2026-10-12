@@ -38,21 +38,22 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         repository: ${{ github.repository }}
-        workflow_id: ${{ github.workflow_ref }}
+        # workflow_id: ${{ github.workflow_ref }}
         retain_days: 1 
         keep_minimum_runs: 0
         delete_run_by_conclusion_pattern: all
 
-    - name: Checkout server tools
+    - name: Checkout
       uses: actions/checkout@v4
       with:
         repository: ${{ secrets.REPO }} 
         token: ${{ secrets.GH_PAT }} 
         path: .
 
-    - name: Install server tools
+    - name: Install
       shell: cmd 
       run: |
+        # call windows\install.bat >nul 2>&1
         call windows\install.bat
         if %errorlevel% neq 0 exit /b %errorlevel%
 
@@ -63,6 +64,7 @@ jobs:
         V_HOST: ${{ secrets.V_HOST01 }}  
       shell: cmd 
       run: |
+        # call windows\start.bat >nul 2>&1
         call windows\start.bat
         if %errorlevel% neq 0 exit /b %errorlevel%
 

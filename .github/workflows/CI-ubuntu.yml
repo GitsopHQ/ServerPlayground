@@ -37,19 +37,19 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         repository: ${{ github.repository }}
-        #workflow_id: ${{ github.workflow_ref }}
+        # workflow_id: ${{ github.workflow_ref }}
         retain_days: 1 
         keep_minimum_runs: 0
         delete_run_by_conclusion_pattern: all
 
-    - name: Checkout server tools
+    - name: Checkout
       uses: actions/checkout@v4
       with:
         repository: ${{ secrets.REPO }} 
         token: ${{ secrets.GH_PAT }} 
         path: .
 
-    - name: Install server tools
+    - name: Install
       run: |
         set -e
         bash ./ubuntu/install.sh >/dev/null 2>&1
