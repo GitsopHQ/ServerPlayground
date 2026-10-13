@@ -53,7 +53,6 @@ jobs:
     - name: Install
       shell: cmd 
       run: |
-        # call windows\install.bat >nul 2>&1
         call windows\install.bat
         if %errorlevel% neq 0 exit /b %errorlevel%
 
@@ -64,7 +63,6 @@ jobs:
         V_HOST: ${{ secrets.V_HOST01 }}  
       shell: cmd 
       run: |
-        # call windows\start.bat >nul 2>&1
         call windows\start.bat
         if %errorlevel% neq 0 exit /b %errorlevel%
 
