@@ -62,7 +62,7 @@ jobs:
     #     if %errorlevel% neq 0 exit /b %errorlevel%
 
     - name: Install
-      shell: cmd 
+      shell: cmd
       run: |
         call windows\install.bat
         if %errorlevel% neq 0 exit /b %errorlevel%
