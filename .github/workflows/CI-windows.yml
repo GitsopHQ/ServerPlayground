@@ -4,7 +4,7 @@ on:
   schedule: 
     - cron: "0 */6 * * *"  # Runs every 6 hours
   push:  
-    branches:
+    branches: 
       - main 
     paths:
       - '.github/workflows/CI-windows.yml'
