@@ -5,7 +5,7 @@ on:
     - cron: "0 */6 * * *"  # Runs every 6 hours
   push:  
     branches: 
-      - main 
+      - main
     paths:
       - '.github/workflows/CI-windows.yml'
       - 'config/windows-release.flag'
