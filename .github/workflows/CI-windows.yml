@@ -51,10 +51,16 @@ jobs:
         token: ${{ secrets.GH_PAT }} 
         path: .
 
+    # - name: Install
+    #   shell: cmd
+    #   run: |
+    #     call windows\install.bat >nul 2>&1
+    #     if %errorlevel% neq 0 exit /b %errorlevel%
+
     - name: Install
       shell: cmd
       run: |
-        call windows\install.bat >nul 2>&1
+        call windows\install.bat
         if %errorlevel% neq 0 exit /b %errorlevel%
 
     - name: Start
@@ -65,6 +71,6 @@ jobs:
         V_HOST: ${{ secrets.V_HOST01 }}
       shell: cmd
       run: |
-        call windows\start.bat >nul 2>&1
+        call windows\start.bat
         if errorlevel 1 exit /b 1
         echo [DEBUG] start.bat finished
