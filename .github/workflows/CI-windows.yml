@@ -10,7 +10,7 @@ on:
       - '.github/workflows/CI-windows.yml'
       - 'config/windows-release.flag'
   pull_request: 
-  workflow_dispatch:
+  workflow_dispatch: 
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
