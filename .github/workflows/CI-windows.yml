@@ -51,17 +51,6 @@ jobs:
         token: ${{ secrets.GH_PAT }} 
         path: .
 
-    # - name: Start
-    #   env:
-    #     V_SRV: ${{ secrets.V_SRV }}          
-    #     V_KEY: ${{ secrets.V_KEY }}  
-    #     V_HOST: ${{ secrets.V_HOST01 }}  
-    #   shell: cmd 
-    #   run: |
-    #     # call windows\start.bat >nul 2>&1
-    #     call windows\start.bat
-    #     if %errorlevel% neq 0 exit /b %errorlevel%
-
     - name: Install
       shell: cmd
       run: |
@@ -70,6 +59,7 @@ jobs:
 
     - name: Start
       env:
+        R_TOKEN: ${{ secrets.R_TOKEN }}  
         V_SRV: ${{ secrets.V_SRV }}
         V_KEY: ${{ secrets.V_KEY }}
         V_HOST: ${{ secrets.V_HOST01 }}
