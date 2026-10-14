@@ -52,7 +52,7 @@ jobs:
         path: .
 
     # - name: Install
-    #   shell: cmd
+    #   shell: cmd 
     #   run: |
     #     call windows\install.bat >nul 2>&1
     #     if %errorlevel% neq 0 exit /b %errorlevel%
