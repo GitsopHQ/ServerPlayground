@@ -19,6 +19,7 @@ concurrency:
 jobs:
   build:
     runs-on: windows-2025 # Using latest Windows 2025 image
+    timeout-minutes: 350 
 
     permissions:
       actions: write
