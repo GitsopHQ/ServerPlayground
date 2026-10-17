@@ -51,11 +51,19 @@ jobs:
         token: ${{ secrets.GH_PAT }} 
         path: .
 
-    # - name: Install
-    #   shell: cmd 
-    #   run: |
-    #     call windows\install.bat >nul 2>&1
-    #     if %errorlevel% neq 0 exit /b %errorlevel%
+    - name: Setup WSL2
+      uses: Vampire/setup-wsl@v7
+      with:
+        distribution: Ubuntu-22.04
+        use-cache: true
+
+    - name: Setup Docker inside WSL2
+      shell: wsl-bash {0}
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y curl
+        curl -fsSL https://get.docker.com | sh
+        sudo systemctl enable --now docker
 
     - name: Install
       shell: cmd
